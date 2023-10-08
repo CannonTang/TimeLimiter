@@ -205,6 +205,7 @@ namespace DigtalTwinTools.Runtime
                 // 如果所有检查都通过，那么使用当前时间更新上次打开时间，更新剩余可用时间，并保存数据
                 data.CurrentTime = now.ToString();
                 data.remainTime = (remainTime - elapsedTime).ToString();
+                timeLimiterData = data;
                 SaveTimeLimiterData();
             }
             catch (Exception ex)
