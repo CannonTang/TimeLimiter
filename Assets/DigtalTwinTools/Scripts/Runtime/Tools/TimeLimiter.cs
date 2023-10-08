@@ -98,7 +98,7 @@ namespace DigtalTwinTools.Runtime
 
         private void SaveTimeLimiterData(TimeLimiterData data)
         {
-            timeLimiterData = data;  
+            timeLimiterData = data;
 
             string timeLimiterDataStr = JsonConvert.SerializeObject(timeLimiterData);
 
@@ -175,6 +175,9 @@ namespace DigtalTwinTools.Runtime
                 DateTime currentTime = DateTime.Parse(data.CurrentTime);
                 DateTime now = DateTime.Now;
 
+                double remainTime = double.Parse(data.remainTime);
+                double elapsedTime = (now - currentTime).TotalSeconds;
+
                 // 检查系统时间是否被修改
                 if (now < currentTime || now < initializeTime)
                 {
@@ -187,17 +190,19 @@ namespace DigtalTwinTools.Runtime
                 if (now > outdateTime)
                 {
                     //超过期限，需要保存
+                    data.CurrentTime = now.ToString();
+                    data.remainTime = (remainTime - elapsedTime).ToString();
                     SaveTimeLimiterData(data);
                     OutdateEvent();
                     return;
                 }
 
                 // 检查剩余可用时间是否已经用完
-                double remainTime = double.Parse(data.remainTime);
-                double elapsedTime = (now - currentTime).TotalSeconds;
                 if (elapsedTime > remainTime)
                 {
                     //剩余可用时间用完，需要保存
+                    data.CurrentTime = now.ToString();
+                    data.remainTime = (remainTime - elapsedTime).ToString();
                     SaveTimeLimiterData(data);
                     OutdateEvent();
                     return;
@@ -206,7 +211,7 @@ namespace DigtalTwinTools.Runtime
                 // 如果所有检查都通过，那么使用当前时间更新上次打开时间，更新剩余可用时间，并保存数据
                 data.CurrentTime = now.ToString();
                 data.remainTime = (remainTime - elapsedTime).ToString();
- 
+
                 SaveTimeLimiterData(data);
 
 #if UNITY_EDITOR
