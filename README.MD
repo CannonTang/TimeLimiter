@@ -18,7 +18,10 @@
      所以只要重新在Unity中修改好新的时间，并初始化一次，再把Streaming Assets的文件提供给客户替换，即可达到更新时间设置的效果
 </p>
 <p> 注1： 过期事件的绑定、密钥的设定，在上图中Inspector面板上说明的很清楚了，这里不再赘述</p>
-<p> 注2： PlayerPrefs（PC端为注册表）内容的查看，如下图所示，可用于自行检验删除注册表，测试功能是否正常等：</p>
+<p> 注2： PlayerPrefs（PC端为注册表）内容的查看，如下图所示：</p>
+<p>  
+     其中的 RegisterKey 就是时间缓存数据，可自行检验删除注册表，测试功能是否正常等
+</p>
 <p> ![](MarkdownImages/06.jpg) </p>
 <p> ![](MarkdownImages/07.jpg) </p>
 
