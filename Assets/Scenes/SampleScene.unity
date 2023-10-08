@@ -168,10 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLimiterData:
-    InitializeTime: 
-    OutdateTime: 
-    CurrentTime: 
-    remainTime: 
+    InitializeTime: 2023/10/8 10:28:24
+    OutdateTime: 2023/11/9 9:23:52
+    CurrentTime: 2023/10/8 10:28:24
+    remainTime: 2760927.8503149
   CheckRate: 60
   outDateEvent:
     m_PersistentCalls:

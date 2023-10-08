@@ -70,8 +70,8 @@ namespace DigtalTwinTools.Runtime
             DateTime now = DateTime.Now;
             timeLimiterData.InitializeTime = now.ToString();
             timeLimiterData.CurrentTime = now.ToString();
-             
-            if (DateTime.TryParse(timeLimiterData.OutdateTime, out DateTime outdateTime))
+            DateTime outdateTime;
+            if (DateTime.TryParse(timeLimiterData.OutdateTime, out outdateTime))
             {
                 TimeSpan difference = outdateTime - now;
                 timeLimiterData.remainTime = difference.TotalSeconds.ToString();
