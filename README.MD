@@ -13,7 +13,6 @@
 <p> 4. 完成填写后，再次点击初始化，此时若出现下图提示，且remainTime（剩余时间）被自动填充，则说明成功</p>
 <p> ![](MarkdownImages/04.jpg) </p>
 <p> 5. CheckRate（检查过期频率）的单位是秒，用于决定每隔多少秒执行一次检查过期的判定（Start时会检查一次），如无必要，不需要修改</p>
-<p> ![](MarkdownImages/04.jpg) </p>
 <p> 
      后续剩余时间的更新方法：由于Streaming Assets中的时间缓存文件的优先级是最高的，
      所以只要重新在Unity中修改好新的时间，并初始化一次，再把Streaming Assets的文件提供给客户替换，即可达到更新时间设置的效果
