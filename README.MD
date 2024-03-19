@@ -51,8 +51,12 @@
 <p>
 
  ![](MarkdownImages/08.jpg) </p>
-<p> 1. [Newtonsoft.Json.dll](https://github.com/SaladLab/Json.Net.Unity3D)：用于Json解析，根据现有环境选择性下载 </p>
-<p> 1. [Obfuscator Pro（代码混淆插件）](https://assetstore.unity.com/packages/tools/utilities/obfuscator-pro-89589)：理论上Unity代码、场景信息都是可以被解包反编译查看的 </p>
+<p>
+
+ [Newtonsoft.Json.dll](https://github.com/SaladLab/Json.Net.Unity3D)：用于Json解析，根据现有环境选择性下载 </p>
+<p>
+
+ [Obfuscator Pro（代码混淆插件）](https://assetstore.unity.com/packages/tools/utilities/obfuscator-pro-89589)：理论上Unity代码、场景信息都是可以被解包反编译查看的 </p>
 </details>
 
 -----
