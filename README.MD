@@ -1,5 +1,9 @@
 # 离线时间限制器
 
+一个简单的时间限制器，指定起始时间、结束时间，超出结束时间时，会触发你设定好的事件，可以达到限制软件使用时间的作用 
+
+A simple time limiter that specifies a start time and an end time. Once the end time is exceeded, it will trigger an event you have set up, which can be used to limit the usage time of the software.
+
 ## 使用说明
 <details>
 <summary>点击收起/展开</summary>
@@ -56,7 +60,7 @@
  [Newtonsoft.Json.dll](https://github.com/SaladLab/Json.Net.Unity3D)：用于Json解析，根据现有环境选择性下载 </p>
 <p>
 
- [Obfuscator Pro（代码混淆插件）](https://assetstore.unity.com/packages/tools/utilities/obfuscator-pro-89589)：理论上Unity代码、场景信息都是可以被解包反编译查看的 </p>
+ [Obfuscator Pro（代码混淆插件）](https://assetstore.unity.com/packages/tools/utilities/obfuscator-pro-89589)：理论上Unity代码、场景信息都是可以被解包反编译查看的，如果一定要万无一失的话可以考虑使用此类型的插件补全漏洞 </p>
 </details>
 
 -----
