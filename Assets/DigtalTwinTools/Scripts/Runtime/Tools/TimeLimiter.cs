@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -6,15 +6,15 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using UnityEngine.Events; 
+using UnityEngine.Events;
 
 namespace DigtalTwinTools.Runtime
-{ 
+{
     public class TimeLimiter : MonoBehaviour
     {
-        [Header("ÀëÏßÊ±¼äÏŞÖÆÆ÷£¬Ê±¼ä»º´æÔÚPlayerPrefsÓëStreamingAssetsÖĞ£¬»ùÓÚAES¼ÓÃÜËã·¨ÊµÏÖ")]
-        [Header("±ØĞëÅäºÏ Obfuscator Pro ´úÂë»ìÏı²å¼şÊ¹ÓÃ£¨µ¼Èë¼´¿É£©")]
-        [Header("·ñÔò´Ë×é¼şÄÚ²¿µÄ¼Ó½âÃÜËã·¨¡¢InspectorÃæ°åÖĞµÄÃÜÔ¿µÈ£¬ÀíÂÛÉÏ¶¼ÊÇ¿ÉÒÔ±»½â°ü·´±àÒë³öÀ´µÄ")]
+        [Header("ç¦»çº¿æ—¶é—´é™åˆ¶å™¨ï¼Œæ—¶é—´ç¼“å­˜åœ¨PlayerPrefsä¸StreamingAssetsä¸­ï¼ŒåŸºäºAESåŠ å¯†ç®—æ³•å®ç°")]
+        [Header("å¿…é¡»é…åˆ Obfuscator Pro ä»£ç æ··æ·†æ’ä»¶ä½¿ç”¨ï¼ˆå¯¼å…¥å³å¯ï¼‰")]
+        [Header("å¦åˆ™æ­¤ç»„ä»¶å†…éƒ¨çš„åŠ è§£å¯†ç®—æ³•ã€Inspectoré¢æ¿ä¸­çš„å¯†é’¥ç­‰ï¼Œç†è®ºä¸Šéƒ½æ˜¯å¯ä»¥è¢«è§£åŒ…åç¼–è¯‘å‡ºæ¥çš„")]
         #region Elements
 
         [SerializeField]
@@ -25,15 +25,15 @@ namespace DigtalTwinTools.Runtime
             get { return Application.streamingAssetsPath + "/UnityCrashLog.crash"; }
         }
 
-        private float calTime=0;
+        private float calTime = 0;
 
-        [Range(30,120)]
+        [Range(30, 120)]
         /// <summary>
-        /// ¼ì²éÆµÂÊ£¨Ãë£©
+        /// æ£€æŸ¥é¢‘ç‡ï¼ˆç§’ï¼‰
         /// </summary>
         public float CheckRate = 60;
-          
-        [Header("¹ıÆÚ¡¢»òÕßÍ¬Ê±ĞŞ¸ÄÁ½´¦»º´æµ¼ÖÂµÄ±¨´í´¥·¢Ê±£¬»á´¥·¢µÄÊÂ¼ş")]
+
+        [Header("è¿‡æœŸã€æˆ–è€…åŒæ—¶ä¿®æ”¹ä¸¤å¤„ç¼“å­˜å¯¼è‡´çš„æŠ¥é”™è§¦å‘æ—¶ï¼Œä¼šè§¦å‘çš„äº‹ä»¶")]
         public UnityEvent outDateEvent;
 
         #endregion
@@ -60,9 +60,9 @@ namespace DigtalTwinTools.Runtime
         #region Logic
 
         /// <summary>
-        /// ³õÊ¼»¯º¯Êı£¬Ö»ÔÚUnity±à¼­Æ÷ÖĞ³õÊ¼»¯Ö´ĞĞ£¬¹ıÆÚÊ±¼ä¼ÇµÃÊÖ¶¯ĞŞ¸Ä
+        /// åˆå§‹åŒ–å‡½æ•°ï¼Œåªåœ¨Unityç¼–è¾‘å™¨ä¸­åˆå§‹åŒ–æ‰§è¡Œï¼Œè¿‡æœŸæ—¶é—´è®°å¾—æ‰‹åŠ¨ä¿®æ”¹
         /// </summary>
-        [ContextMenu("³õÊ¼»¯")]
+        [ContextMenu("åˆå§‹åŒ–")]
         public void Initialize()
         {
 #if UNITY_EDITOR
@@ -78,35 +78,31 @@ namespace DigtalTwinTools.Runtime
 
                 if (difference.TotalSeconds > 0)
                 {
-                    SaveTimeLimiterData();
+                    SaveTimeLimiterData(timeLimiterData);
 
-                    Debug.Log("¸üĞÂ ³õÊ¼»¯Ê±¼ä ºÍ×î½üÒ»´Î´ò¿ªµÄÊ±¼ä");
-                    Debug.Log("Ê£ÓàÊ±¼äÒÑÉèÖÃÎª " + timeLimiterData.remainTime + " Ãë");
+                    Debug.Log("æ›´æ–° åˆå§‹åŒ–æ—¶é—´ å’Œæœ€è¿‘ä¸€æ¬¡æ‰“å¼€çš„æ—¶é—´");
+                    Debug.Log("å‰©ä½™æ—¶é—´å·²è®¾ç½®ä¸º " + timeLimiterData.remainTime + " ç§’");
                 }
                 else
                 {
-                    Debug.LogError("¹ıÆÚÊ±¼äĞ¡ÓÚ³õÊ¼»¯Ê±¼ä£¬ÕâÊÇÎŞĞ§µÄ");
+                    Debug.LogError("è¿‡æœŸæ—¶é—´å°äºåˆå§‹åŒ–æ—¶é—´ï¼Œè¿™æ˜¯æ— æ•ˆçš„");
                 }
 
             }
             else
             {
-                Debug.LogError("¹ıÆÚÊ±¼äÌîĞ´ÎŞĞ§£¬ÇëÊÖ¶¯ĞŞ¸Ä³ÉÕıÈ·µÄÖµ£¬È»ºóÔÙÖ´ĞĞ³õÊ¼»¯");
+                Debug.LogError("è¿‡æœŸæ—¶é—´å¡«å†™æ— æ•ˆï¼Œè¯·æ‰‹åŠ¨ä¿®æ”¹æˆæ­£ç¡®çš„å€¼ï¼Œç„¶åå†æ‰§è¡Œåˆå§‹åŒ–");
             }
 #endif
         }
 
-        private void SaveTimeLimiterData()
+        private void SaveTimeLimiterData(TimeLimiterData data)
         {
-#if UNITY_EDITOR
-            Debug.Log("µ½ÁËÕâÒ»²½£¬ËµÃ÷µ±Ç°ÏµÍ³Í¨¹ıÁËÊ±¼ä¼ì²â£¬ÉĞÎ´¹ıÆÚ");
-#else
-            Debug.Log("Registered");
-#endif
+            timeLimiterData = data;  
 
             string timeLimiterDataStr = JsonConvert.SerializeObject(timeLimiterData);
 
-            string timeLimiterDataStr_Code = Encode(timeLimiterDataStr);//¼ÓÃÜ
+            string timeLimiterDataStr_Code = Encode(timeLimiterDataStr);//åŠ å¯†
 
             if (!Directory.Exists(Application.streamingAssetsPath))
                 Directory.CreateDirectory(Application.streamingAssetsPath);
@@ -122,11 +118,11 @@ namespace DigtalTwinTools.Runtime
 
         }
 
-        // ¼ì²éµÄË¼Â·£¬Ê×ÏÈ¼ì²é×¢²á±íµÄÊ±¼ä£¬ÅĞ¶Ïµ±Ç°Ê±¼äÊÇ·ñÕı³££¨»ùÓÚÉÏ´Î´æ´¢µÄÊı¾İ£¬ÅĞ¶ÏÓÃ»§ÊÇ·ñĞŞ¸ÄÁË±¾µØÏµÍ³Ê±¼ä£¬Èç¹ûÃ»ÓĞĞŞ¸Ä£¬ÄÇÃ´ÊÇ²»ÊÇÔÚÓĞĞ§·¶Î§ÄÚÎ´¹ıÆÚ£©
-        //ÓÅÏÈ»ñÈ¡StreamingAssetsÖĞµÄÊı¾İ£¬Èç¹ûÊ§°Ü£¬Ôò¶ÁÈ¡×¢²á±íÄÚµÄÊı¾İ£¨ÓÅÏÈ¼¶µÍ£©£¬½øĞĞ¹ıÆÚ¼ì²â
-        //Èç¹ûÉÏÊö¼ì²â²»Í¨¹ı£¬ÔòÖ´ĞĞOutdateEvent·½·¨£¬·ñÔò±íÊ¾Í¨¹ı¼ì²â£¬²»Ö´ĞĞOutdateEvent¡£
-        //Í¬ÑùĞèÒª¿¼ÂÇ¼Ó½âÃÜ´íÎóµÄÇé¿ö£¨ÎÄ¼ş±»ĞŞ¸Ä£©£¬²ÉÈ¡Try CatchµÄĞÎÊ½£¬Èç¹û±¨´í£¬Ò»ÑùÖ´ĞĞOutdateEvent
-        // ¼ì²éÍê±Ïºó£¬Èç¹ûÃ»ÓĞĞŞ¸Ä£¬Ôò¸üĞÂ²¢±£´æ´Î´ËÊ±¼äÊı¾İ£¬Èç¹û¼ì²âµ½ĞŞ¸ÄÁË£¬Ôò²»±£´æ
+        // æ£€æŸ¥çš„æ€è·¯ï¼Œé¦–å…ˆæ£€æŸ¥æ³¨å†Œè¡¨çš„æ—¶é—´ï¼Œåˆ¤æ–­å½“å‰æ—¶é—´æ˜¯å¦æ­£å¸¸ï¼ˆåŸºäºä¸Šæ¬¡å­˜å‚¨çš„æ•°æ®ï¼Œåˆ¤æ–­ç”¨æˆ·æ˜¯å¦ä¿®æ”¹äº†æœ¬åœ°ç³»ç»Ÿæ—¶é—´ï¼Œå¦‚æœæ²¡æœ‰ä¿®æ”¹ï¼Œé‚£ä¹ˆæ˜¯ä¸æ˜¯åœ¨æœ‰æ•ˆèŒƒå›´å†…æœªè¿‡æœŸï¼‰
+        //ä¼˜å…ˆè·å–StreamingAssetsä¸­çš„æ•°æ®ï¼Œå¦‚æœå¤±è´¥ï¼Œåˆ™è¯»å–æ³¨å†Œè¡¨å†…çš„æ•°æ®ï¼ˆä¼˜å…ˆçº§ä½ï¼‰ï¼Œè¿›è¡Œè¿‡æœŸæ£€æµ‹
+        //å¦‚æœä¸Šè¿°æ£€æµ‹ä¸é€šè¿‡ï¼Œåˆ™æ‰§è¡ŒOutdateEventæ–¹æ³•ï¼Œå¦åˆ™è¡¨ç¤ºé€šè¿‡æ£€æµ‹ï¼Œä¸æ‰§è¡ŒOutdateEventã€‚
+        //åŒæ ·éœ€è¦è€ƒè™‘åŠ è§£å¯†é”™è¯¯çš„æƒ…å†µï¼ˆæ–‡ä»¶è¢«ä¿®æ”¹ï¼‰ï¼Œé‡‡å–Try Catchçš„å½¢å¼ï¼Œå¦‚æœæŠ¥é”™ï¼Œä¸€æ ·æ‰§è¡ŒOutdateEvent
+        // æ£€æŸ¥å®Œæ¯•åï¼Œå¦‚æœæ²¡æœ‰ä¿®æ”¹ï¼Œåˆ™æ›´æ–°å¹¶ä¿å­˜æ¬¡æ­¤æ—¶é—´æ•°æ®ï¼Œå¦‚æœæ£€æµ‹åˆ°ä¿®æ”¹äº†ï¼Œåˆ™ä¸ä¿å­˜
         private void CheckState()
         {
             try
@@ -135,7 +131,7 @@ namespace DigtalTwinTools.Runtime
 
                 try
                 {
-                    // ´ÓÎÄ¼şÖĞ¶ÁÈ¡¼ÓÃÜµÄÊ±¼äÊı¾İ
+                    // ä»æ–‡ä»¶ä¸­è¯»å–åŠ å¯†çš„æ—¶é—´æ•°æ®
                     encryptedDataStr = File.ReadAllText(timeLimiterJsonPath);
 
                 }
@@ -144,12 +140,12 @@ namespace DigtalTwinTools.Runtime
 
                     Debug.LogError("time cache file read failed");
 
-                    // PlayerPrefsÖĞµÄÊı¾İ
+                    // PlayerPrefsä¸­çš„æ•°æ®
                     string prefsDataStr = PlayerPrefs.GetString("RegisterKey");
 
                     try
                     {
-                        // ³¢ÊÔ½âÃÜPlayerPrefsÖĞµÄÊı¾İ£¬Èç¹û³É¹¦ÔòÊ¹ÓÃÕâĞ©Êı¾İ
+                        // å°è¯•è§£å¯†PlayerPrefsä¸­çš„æ•°æ®ï¼Œå¦‚æœæˆåŠŸåˆ™ä½¿ç”¨è¿™äº›æ•°æ®
                         Decode(prefsDataStr);
                         encryptedDataStr = prefsDataStr;
                     }
@@ -157,7 +153,7 @@ namespace DigtalTwinTools.Runtime
                     {
 
 #if UNITY_EDITOR
-                        Debug.LogError("Á½´¦»º´æÍ¬Ê±¶ÁÈ¡Ê§°Ü , Îó²Ù×÷µÄ¿ÉÄÜĞÔ¼«µÍ£¬Ö´ĞĞoutdateÊÂ¼ş ");
+                        Debug.LogError("ä¸¤å¤„ç¼“å­˜åŒæ—¶è¯»å–å¤±è´¥ , è¯¯æ“ä½œçš„å¯èƒ½æ€§æä½ï¼Œæ‰§è¡Œoutdateäº‹ä»¶ ");
 #else
                         Debug.LogError("RegisterKey read failed too");
 #endif
@@ -167,50 +163,62 @@ namespace DigtalTwinTools.Runtime
 
                 }
 
-                // ½âÃÜÊı¾İ
+                // è§£å¯†æ•°æ®
                 string decryptedDataStr = Decode(encryptedDataStr);
 
-                // ½âÎöÊı¾İ
+                // è§£ææ•°æ®
                 TimeLimiterData data = JsonConvert.DeserializeObject<TimeLimiterData>(decryptedDataStr);
 
-                // ÑéÖ¤Êı¾İ
+                // éªŒè¯æ•°æ®
                 DateTime initializeTime = DateTime.Parse(data.InitializeTime);
                 DateTime outdateTime = DateTime.Parse(data.OutdateTime);
                 DateTime currentTime = DateTime.Parse(data.CurrentTime);
                 DateTime now = DateTime.Now;
 
-                // ¼ì²éÏµÍ³Ê±¼äÊÇ·ñ±»ĞŞ¸Ä
+                // æ£€æŸ¥ç³»ç»Ÿæ—¶é—´æ˜¯å¦è¢«ä¿®æ”¹
                 if (now < currentTime || now < initializeTime)
                 {
+                    //å‡çš„æ—¶é—´ï¼Œä¸æ‰§è¡Œä¿å­˜
                     OutdateEvent();
                     return;
                 }
 
-                // ¼ì²éÊÇ·ñ³¬¹ıÊ¹ÓÃÆÚÏŞ
+                // æ£€æŸ¥æ˜¯å¦è¶…è¿‡ä½¿ç”¨æœŸé™
                 if (now > outdateTime)
                 {
+                    //è¶…è¿‡æœŸé™ï¼Œéœ€è¦ä¿å­˜
+                    SaveTimeLimiterData(data);
                     OutdateEvent();
                     return;
                 }
 
-                // ¼ì²éÊ£Óà¿ÉÓÃÊ±¼äÊÇ·ñÒÑ¾­ÓÃÍê
+                // æ£€æŸ¥å‰©ä½™å¯ç”¨æ—¶é—´æ˜¯å¦å·²ç»ç”¨å®Œ
                 double remainTime = double.Parse(data.remainTime);
                 double elapsedTime = (now - currentTime).TotalSeconds;
                 if (elapsedTime > remainTime)
                 {
+                    //å‰©ä½™å¯ç”¨æ—¶é—´ç”¨å®Œï¼Œéœ€è¦ä¿å­˜
+                    SaveTimeLimiterData(data);
                     OutdateEvent();
                     return;
                 }
 
-                // Èç¹ûËùÓĞ¼ì²é¶¼Í¨¹ı£¬ÄÇÃ´Ê¹ÓÃµ±Ç°Ê±¼ä¸üĞÂÉÏ´Î´ò¿ªÊ±¼ä£¬¸üĞÂÊ£Óà¿ÉÓÃÊ±¼ä£¬²¢±£´æÊı¾İ
+                // å¦‚æœæ‰€æœ‰æ£€æŸ¥éƒ½é€šè¿‡ï¼Œé‚£ä¹ˆä½¿ç”¨å½“å‰æ—¶é—´æ›´æ–°ä¸Šæ¬¡æ‰“å¼€æ—¶é—´ï¼Œæ›´æ–°å‰©ä½™å¯ç”¨æ—¶é—´ï¼Œå¹¶ä¿å­˜æ•°æ®
                 data.CurrentTime = now.ToString();
                 data.remainTime = (remainTime - elapsedTime).ToString();
-                timeLimiterData = data;
-                SaveTimeLimiterData();
+ 
+                SaveTimeLimiterData(data);
+
+#if UNITY_EDITOR
+                Debug.Log("åˆ°äº†è¿™ä¸€æ­¥ï¼Œè¯´æ˜å½“å‰ç³»ç»Ÿé€šè¿‡äº†æ—¶é—´æ£€æµ‹ï¼Œå°šæœªè¿‡æœŸ");
+#else
+            Debug.Log("Registered");
+#endif
+
             }
             catch (Exception ex)
             {
-                // Èç¹û´¦Àí¹ı³ÌÖĞÓĞ´íÎó£¨Èç½âÃÜ´íÎó£©£¬ÔòÊÓÎª¹ıÆÚ
+                // å¦‚æœå¤„ç†è¿‡ç¨‹ä¸­æœ‰é”™è¯¯ï¼ˆå¦‚è§£å¯†é”™è¯¯ï¼‰ï¼Œåˆ™è§†ä¸ºè¿‡æœŸ
                 Debug.LogError(ex.ToString());
                 OutdateEvent();
             }
@@ -222,14 +230,14 @@ namespace DigtalTwinTools.Runtime
             Debug.LogError("OutdateEvent was triggered");
         }
 
-        [ContextMenu("´òÓ¡½âÃÜµÄ½á¹û")]
+        [ContextMenu("æ‰“å°è§£å¯†çš„ç»“æœ")]
         public void TryDecode()
         {
-            Decode(File.ReadAllText(timeLimiterJsonPath));
+            Debug.Log(Decode(File.ReadAllText(timeLimiterJsonPath)));
         }
 
         /// <summary>
-        /// ½âÃÜ
+        /// è§£å¯†
         /// </summary> 
         public string Decode(string timeLimiterDataStr_Code)
         {
@@ -241,7 +249,7 @@ namespace DigtalTwinTools.Runtime
         }
 
         /// <summary>
-        /// ¼ÓÃÜ
+        /// åŠ å¯†
         /// </summary> 
         public string Encode(string timeLimiterDataStr)
         {
@@ -250,17 +258,17 @@ namespace DigtalTwinTools.Runtime
             return timeLimiterDataStr_Code;
         }
 
-#endregion
+        #endregion
 
-        #region AES ¼ÓÃÜËã·¨
+        #region AES åŠ å¯†ç®—æ³•
 
-        [Header("baseKey ºÍ baseIv ÓÃÓÚÉú³ÉÕæÕıµÄ key ºÍ iv£¬½¨ÒéÊ¹ÓÃÓ¢ÎÄºÍÊı×Ö×éºÏ")]
-        [Header("Ã¿¸öĞèÒª¼ÓÃÜµÄÏîÄ¿¶¼½¨ÒéÊ¹ÓÃ²»Í¬µÄkeyºÍiv£¬²¢ÖØµã±£´æÒÔÃâ¶ªÊ§¡¢Ğ¹ÃÜ")]
-        public string baseKey ="youhavetochangethisdefaultkey";
-        public string baseIv= "youhavetochangethisdefaultiv";
+        [Header("baseKey å’Œ baseIv ç”¨äºç”ŸæˆçœŸæ­£çš„ key å’Œ ivï¼Œå»ºè®®ä½¿ç”¨è‹±æ–‡å’Œæ•°å­—ç»„åˆ")]
+        [Header("æ¯ä¸ªéœ€è¦åŠ å¯†çš„é¡¹ç›®éƒ½å»ºè®®ä½¿ç”¨ä¸åŒçš„keyå’Œivï¼Œå¹¶é‡ç‚¹ä¿å­˜ä»¥å…ä¸¢å¤±ã€æ³„å¯†")]
+        public string baseKey = "youhavetochangethisdefaultkey";
+        public string baseIv = "youhavetochangethisdefaultiv";
 
         /// <summary>
-        /// ÊµÏÖÒ»¸ö¹Ì¶¨µÄ×ª»»·½·¨£¬»ùÓÚ baseKey ×ª³É key£¬baseIv ×ª³É iv
+        /// å®ç°ä¸€ä¸ªå›ºå®šçš„è½¬æ¢æ–¹æ³•ï¼ŒåŸºäº baseKey è½¬æˆ keyï¼ŒbaseIv è½¬æˆ iv
         /// </summary>
         private void ConvertKeyAndIV()
         {
@@ -276,7 +284,7 @@ namespace DigtalTwinTools.Runtime
         }
 
         private byte[] key = new byte[32]; // 256 bits key
-        private  byte[] iv = new byte[16]; // 128 bits IV
+        private byte[] iv = new byte[16]; // 128 bits IV
 
         private string Encrypt(string plainText)
         {
@@ -337,35 +345,40 @@ namespace DigtalTwinTools.Runtime
 
         #endregion
 
+        public void QuitApp()
+        {
+            Application.Quit();
+        }
+
     }
 
     /// <summary>
-    /// ×¢£º×÷ÎªPlayerPrefs´æ´¢Ê±£¬¿É´æ´¢×î´ó1MB´óĞ¡µÄÊı¾İ
+    /// æ³¨ï¼šä½œä¸ºPlayerPrefså­˜å‚¨æ—¶ï¼Œå¯å­˜å‚¨æœ€å¤§1MBå¤§å°çš„æ•°æ®
     /// </summary>
     [System.Serializable]
     public class TimeLimiterData
     {
         /// <summary>
-        /// ³õÊ¼»¯Ê±¼ä-----ÕâÊÇÒ»¸öÃªµã£¬¼ÇÂ¼Ò»¸ö¾ø¶Ô×¼È·µÄ¡¢ÕæÊµµÄ¡¢²»»áµ¹ÍËµÄÊ±¼ä£¬µ«Ò²Òò´Ë£¬³ı·ÇÊ¹ÓÃInitializeº¯Êı£¬Ëü»áÎŞ·¨¸üĞÂ£¬Ê¼ÖÕÍ£ÁôÔÚÒ»¸öÏà¶ÔÂäºóµÄ½×¶Î
+        /// åˆå§‹åŒ–æ—¶é—´-----è¿™æ˜¯ä¸€ä¸ªé”šç‚¹ï¼Œè®°å½•ä¸€ä¸ªç»å¯¹å‡†ç¡®çš„ã€çœŸå®çš„ã€ä¸ä¼šå€’é€€çš„æ—¶é—´ï¼Œä½†ä¹Ÿå› æ­¤ï¼Œé™¤éä½¿ç”¨Initializeå‡½æ•°ï¼Œå®ƒä¼šæ— æ³•æ›´æ–°ï¼Œå§‹ç»ˆåœç•™åœ¨ä¸€ä¸ªç›¸å¯¹è½åçš„é˜¶æ®µ
         /// </summary>
         public string InitializeTime;
 
         /// <summary>
-        /// ¹ıÆÚÊ±¼ä------ÊÖ¶¯ĞŞ¸Ä
+        /// è¿‡æœŸæ—¶é—´------æ‰‹åŠ¨ä¿®æ”¹
         /// </summary>
         public string OutdateTime;
 
         /// <summary>
-        /// ×îĞÂÒ»´Î´ò¿ªµÄÊ±¼ä------²»Ò»¶¨×¼È·£¬ÒòÎª¿Í»§µÄÊ±¼ä¿ÉÄÜ»á±»ÀëÏßÊÖ¶¯ĞŞ¸Ä
+        /// æœ€æ–°ä¸€æ¬¡æ‰“å¼€çš„æ—¶é—´------ä¸ä¸€å®šå‡†ç¡®ï¼Œå› ä¸ºå®¢æˆ·çš„æ—¶é—´å¯èƒ½ä¼šè¢«ç¦»çº¿æ‰‹åŠ¨ä¿®æ”¹
         /// </summary>
         public string CurrentTime;
 
         /// <summary>
-        /// Ê£Óà¿ÉÓÃÊ±¼ä£¨Ãë£©£¬ÓÃÓÚ¸¨ÖúĞ£Ñé£¬
-        /// ÒòÎªÊ¹ÓÃÕßÈÔÈ»ÓĞ¿ÉÄÜÍ¨¹ıÃ¿´ÎÍùÇ°µ÷ÕûÒ»µãµãÊ±¼ä£¬À´´ïµ½³ÖĞøÊ¹ÓÃµÄĞ§¹û£¨ËäÈ»·±Ëöµ«ÊÇ¿ÉĞĞ£©£¬ËùÒÔÕâÀïÊÇ±ØÒªµÄ
-        /// Ã¿´ÎCheckÊ±Ö»»á¼õÉÙ£¬¶ø²»ÊÇÖØĞÂ¼ÆËã
+        /// å‰©ä½™å¯ç”¨æ—¶é—´ï¼ˆç§’ï¼‰ï¼Œç”¨äºè¾…åŠ©æ ¡éªŒï¼Œ
+        /// å› ä¸ºä½¿ç”¨è€…ä»ç„¶æœ‰å¯èƒ½é€šè¿‡æ¯æ¬¡å¾€å‰è°ƒæ•´ä¸€ç‚¹ç‚¹æ—¶é—´ï¼Œæ¥è¾¾åˆ°æŒç»­ä½¿ç”¨çš„æ•ˆæœï¼ˆè™½ç„¶ç¹çä½†æ˜¯å¯è¡Œï¼‰ï¼Œæ‰€ä»¥è¿™é‡Œæ˜¯å¿…è¦çš„
+        /// æ¯æ¬¡Checkæ—¶åªä¼šå‡å°‘ï¼Œè€Œä¸æ˜¯é‡æ–°è®¡ç®—
         /// </summary>
         public string remainTime;
     }
-     
+
 }
